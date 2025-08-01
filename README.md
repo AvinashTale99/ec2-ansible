@@ -149,5 +149,6 @@ chmod 400 aws/ansible.pem
 
 **Avinash Tale**  
 GitHub: [AvinashTale99](https://github.com/AvinashTale99)
+Docker Hub: [avinashtale99](https://hub.docker.com/u/avinashtale99)
 
 ---
