@@ -1,3 +1,4 @@
+
 # 🛠️ Ansible Setup on AWS EC2 Instances
 
 ## 📘 Overview  
@@ -30,37 +31,42 @@ Use a key pair named: `ansible.pem`
 
 ```bash
 ssh -i "ansible.pem" ec2-user@<Control_Node_Public_IP>
-🛠️ Install Dependencies
-bash
-Copy
-Edit
+```
+
+### 🛠️ Install Dependencies
+
+```bash
 sudo yum update -y
 sudo yum install python3-pip tree -y
 
 python3 --version
 pip3 --version
-📦 Install Ansible
-bash
-Copy
-Edit
-sudo pip3 install ansible
-Optional alternative:
+```
 
-bash
-Copy
-Edit
+### 📦 Install Ansible
+
+```bash
+sudo pip3 install ansible
+```
+
+**Optional alternative:**
+
+```bash
 sudo yum search ansible
 sudo yum install ansible.noarch
-bash
-Copy
-Edit
-ansible --version
-📁 3. Ansible Project Structure
-Recommended directory layout on the control node (/etc/ansible or your project directory):
+```
 
-bash
-Copy
-Edit
+```bash
+ansible --version
+```
+
+---
+
+## 📁 3. Ansible Project Structure
+
+Recommended directory layout on the control node (`/etc/ansible` or your project directory):
+
+```bash
 .
 ├── ansible.cfg
 ├── aws
@@ -69,12 +75,15 @@ Edit
 │   └── hosts               # Inventory file with EC2 IPs
 ├── playbooks              # Ansible playbooks
 └── roles                  # Ansible roles
-⚙️ 4. ansible.cfg
-Create an ansible.cfg file in the root of your project:
+```
 
-ini
-Copy
-Edit
+---
+
+## ⚙️ 4. `ansible.cfg`
+
+Create an `ansible.cfg` file in the root of your project:
+
+```ini
 [defaults]
 inventory = ./inventory
 remote_user = ec2-user
@@ -87,42 +96,52 @@ become = true
 become_method = sudo
 become_user = root
 become_ask_pass = false
-📇 5. Inventory File
-Create the file inventory/hosts with your EC2 public IPs:
+```
 
-ini
-Copy
-Edit
+---
+
+## 📇 5. Inventory File
+
+Create the file `inventory/hosts` with your EC2 public IPs:
+
+```ini
 [all]
 3.110.103.199
 52.90.194.255
-Optional grouping:
+```
 
-ini
-Copy
-Edit
+**Optional grouping:**
+
+```ini
 [webservers]
 174.129.61.157
 13.233.144.213
-🔎 6. Test Ansible Connection
+```
+
+---
+
+## 🔎 6. Test Ansible Connection
+
 Run the ping module to test SSH connectivity:
 
-bash
-Copy
-Edit
+```bash
 sudo ansible -m ping all
-✅ Expected Output:
-txt
-Copy
-Edit
+```
+
+### ✅ Expected Output:
+
+```txt
 3.110.103.199 | SUCCESS => {...}
 13.233.144.213 | SUCCESS => {...}
-🛡️ Notes
-Make sure the security group of all instances allows inbound SSH (port 22) from your IP or your VPC.
+```
 
-Ensure the SSH private key has correct permissions:
+---
 
-bash
-Copy
-Edit
+## 🛡️ Notes
+
+- Make sure the **security group** of all instances allows inbound SSH (port **22**) from your IP or your VPC.
+- Ensure the **SSH private key** has correct permissions:
+
+```bash
 chmod 400 aws/ansible.pem
+```
