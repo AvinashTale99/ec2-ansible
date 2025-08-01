@@ -1,29 +1,34 @@
-🛠️ Ansible Setup on AWS EC2 Instances
-📘 Overview
+# 🛠️ Ansible Setup on AWS EC2 Instances
+
+## 📘 Overview  
 This guide walks you through setting up an Ansible control node on an AWS EC2 instance and connecting it to two managed EC2 hosts for automated configuration management.
 
-☁️ 1. EC2 Instance Setup
-🔹 Launch 3 EC2 Instances
-AMI: Amazon Linux 2023
+---
 
-Network: Same VPC and Subnet
+## ☁️ 1. EC2 Instance Setup
 
-🖥️ Instance Types
-Role	Instance Type
-Ansible Control Node	t3.medium (Start with t3.micro)
-Managed Host 1	t3.micro
-Managed Host 2	t3.micro
+### 🔹 Launch 3 EC2 Instances
+- **AMI**: Amazon Linux 2023  
+- **Network**: Same VPC and Subnet
 
-🔐 SSH Key Pair
-Use a key pair named: ansible.pem
+### 🖥️ Instance Types
 
-⚙️ 2. Setup on the Control Node
-🖥️ Connect to Control Node
-SSH into the control node:
+| Role                | Instance Type    |
+|---------------------|------------------|
+| Ansible Control Node| `t3.medium` _(Start with `t3.micro`)_ |
+| Managed Host 1      | `t3.micro`       |
+| Managed Host 2      | `t3.micro`       |
 
-bash
-Copy
-Edit
+### 🔐 SSH Key Pair
+Use a key pair named: `ansible.pem`
+
+---
+
+## ⚙️ 2. Setup on the Control Node
+
+### 🖥️ Connect to Control Node
+
+```bash
 ssh -i "ansible.pem" ec2-user@<Control_Node_Public_IP>
 🛠️ Install Dependencies
 bash
@@ -34,14 +39,21 @@ sudo yum install python3-pip tree -y
 
 python3 --version
 pip3 --version
-
-# Install Ansible
+📦 Install Ansible
+bash
+Copy
+Edit
 sudo pip3 install ansible
+Optional alternative:
 
-# Optional alternative:
+bash
+Copy
+Edit
 sudo yum search ansible
 sudo yum install ansible.noarch
-
+bash
+Copy
+Edit
 ansible --version
 📁 3. Ansible Project Structure
 Recommended directory layout on the control node (/etc/ansible or your project directory):
@@ -52,11 +64,11 @@ Edit
 .
 ├── ansible.cfg
 ├── aws
-│   └── ansible.pem          # SSH private key
+│   └── ansible.pem         # SSH private key
 ├── inventory
-│   └── hosts                # Inventory file with EC2 IPs
-├── playbooks                # Ansible playbooks
-└── roles                    # Ansible roles
+│   └── hosts               # Inventory file with EC2 IPs
+├── playbooks              # Ansible playbooks
+└── roles                  # Ansible roles
 ⚙️ 4. ansible.cfg
 Create an ansible.cfg file in the root of your project:
 
@@ -82,7 +94,7 @@ ini
 Copy
 Edit
 [all]
-3.110.103.199 
+3.110.103.199
 52.90.194.255
 Optional grouping:
 
@@ -100,11 +112,10 @@ Copy
 Edit
 sudo ansible -m ping all
 ✅ Expected Output:
-text
+txt
 Copy
 Edit
-
-3.110.103.199  | SUCCESS => {...}
+3.110.103.199 | SUCCESS => {...}
 13.233.144.213 | SUCCESS => {...}
 🛡️ Notes
 Make sure the security group of all instances allows inbound SSH (port 22) from your IP or your VPC.
