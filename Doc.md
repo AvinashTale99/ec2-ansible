@@ -197,11 +197,4 @@ ansible-playbook playbooks/setup.yml
 
 ---
 
-## 👥 Contributors
-
-* **Atul Kamble** – Lead Configuration & Troubleshooting
-* **Avinash Tale** – Assisted in Setup & SSH Config
-* **Harshal Mali** – Helped Resolve Docker Login Issue
-
----
 
