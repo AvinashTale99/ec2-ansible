@@ -107,14 +107,14 @@ Create the file `inventory/hosts` with your EC2 public IPs:
 ```ini
 [all]
 3.110.103.199
-52.90.194.255
+13.233.144.213
 ```
 
 **Optional grouping:**
 
 ```ini
 [webservers]
-174.129.61.157
+3.110.103.199
 13.233.144.213
 ```
 
@@ -132,7 +132,7 @@ sudo ansible -m ping all
 
 ```txt
 3.110.103.199 | SUCCESS => {...}
-13.233.144.213 | SUCCESS => {...}
+13.233.144.213| SUCCESS => {...}
 ```
 
 ---
