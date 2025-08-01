@@ -145,3 +145,9 @@ sudo ansible -m ping all
 ```bash
 chmod 400 aws/ansible.pem
 ```
+## 👤 Author
+
+**Avinash Tale**  
+GitHub: [AvinashTale99](https://github.com/AvinashTale99)
+
+---
